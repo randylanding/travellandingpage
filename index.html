@@ -400,7 +400,7 @@
                     </ul>
                 </div>
 
-                <form id="affiliateApplication"action="https://formspree.io/f/xkgqwwbk" method="POST">
+                <form id="affiliateApplication">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
@@ -551,46 +551,46 @@
     </section>
 
     <script>
+        let formData = {};
+        
         document.getElementById('affiliateApplication').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Collect form data
-            const formData = new FormData(this);
-            const applicationData = {};
-            for (let [key, value] of formData.entries()) {
-                applicationData[key] = value;
+            // Collect form data for later submission
+            const form = new FormData(this);
+            for (let [key, value] of form.entries()) {
+                formData[key] = value;
             }
             
-            // Store application data (in a real implementation, this would go to your server)
-            console.log('Demographic information submitted:', applicationData);
-            
-            // Hide the form and show video section
+            // Hide form and show video section immediately
             this.style.display = 'none';
             document.getElementById('videoSection').style.display = 'block';
-            
-            // Smooth scroll to video section
             document.getElementById('videoSection').scrollIntoView({
                 behavior: 'smooth',
                 block: 'center'
             });
         });
         
-        // Video watching simulation
+        // Video watching function - now submits form data
         function watchVideo() {
-            // In real implementation, this would open actual video
             alert('Opening introduction video...\n\nIn a real implementation, this would:\n1. Open your actual intro video\n2. Track completion\n3. Enable calendar booking\n\nFor demo purposes, click OK to simulate video completion.');
             
-            // Simulate video completion
+            // Submit form data to Formspree after video is watched
+            fetch('https://formspree.io/f/xkgqwwbk', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            // Show calendar booking
             document.getElementById('videoWatched').style.display = 'block';
         }
         
         // Calendar scheduling function  
         function scheduleCall() {
-            // In real implementation, integrate with Calendly, Acuity, or similar
             alert('Opening calendar to schedule your strategy call...\n\nIn your real implementation, this would open:\n• Calendly link\n• Acuity Scheduling\n• Your preferred booking system\n\nExample: https://calendly.com/yourname/strategy-call');
-            
-            // Example integration - replace with your actual calendar link
-            // window.open('https://calendly.com/yourname/strategy-call', '_blank');
         }
         
         // Smooth scrolling for anchor links
@@ -606,6 +606,6 @@
                 }
             });
         });
-    </script>
+</script>
 </body>
 </html>
