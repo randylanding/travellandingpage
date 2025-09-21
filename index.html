@@ -551,14 +551,17 @@
     </section>
 
     <script>
-     function submitForm() {
-    console.log('Button clicked');
+    function submitForm() {
+    alert('Button was clicked! Video section should appear now.');
     
     // Hide the entire form container
-    const formContainer = document.querySelector('.form-container');
-    if (formContainer) {
-        formContainer.style.display = 'none';
-    }
+    document.querySelector('.form-container').style.display = 'none';
+    
+    // Show video section
+    document.getElementById('videoSection').style.display = 'block';
+    
+    return false;
+    }    
     
     // Make sure video section is visible and scrolled to
     const videoSection = document.getElementById('videoSection');
