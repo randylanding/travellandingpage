@@ -527,7 +527,7 @@
                     <button type="submit" class="cta-button" style="width: 100%; margin-top: 30px;">Submit Information & Watch Video</button>
                     
                     <!-- Introduction Video Section - Shows after form submission -->
-                    <div id="videoSection" style="display: block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 40px; margin: 40px 0; text-align: center; color: white;">
+                    <div id="videoSection" style="display: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 40px; margin: 40px 0; text-align: center; color: white;">
                         <h3 style="color: white; margin-bottom: 20px; font-size: 1.8em;">🎉 Great! Now Watch Your Exclusive Introduction Video</h3>
                         <p style="margin-bottom: 25px; font-size: 1.1em; opacity: 0.9;">Thank you for providing your information. Now watch our 12-minute introduction video that reveals exactly how our system works and what we're looking for in partners.</p>
                         
@@ -551,7 +551,24 @@
     </section>
 
     <script>
-      function submitForm() {
+     function submitForm() {
+    console.log('Button clicked');
+    
+    // Hide the entire form container
+    const formContainer = document.querySelector('.form-container');
+    if (formContainer) {
+        formContainer.style.display = 'none';
+    }
+    
+    // Make sure video section is visible and scrolled to
+    const videoSection = document.getElementById('videoSection');
+    if (videoSection) {
+        videoSection.style.display = 'block';
+        videoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    return false; // Prevent any form submission
+}{
     console.log('Button clicked');
     
     // Hide the form
