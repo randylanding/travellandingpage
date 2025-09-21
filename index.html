@@ -551,61 +551,33 @@
     </section>
 
     <script>
-        let formData = {};
-        
-        document.getElementById('affiliateApplication').addEventListener('submit', function(e) {
+       document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('affiliateApplication');
+    const videoSection = document.getElementById('videoSection');
+    
+    if (form && videoSection) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log('Form submitted - preventing refresh');
             
-            // Collect form data for later submission
-            const form = new FormData(this);
-            for (let [key, value] of form.entries()) {
-                formData[key] = value;
-            }
+            // Hide form
+            form.style.display = 'none';
             
-            // Hide form and show video section immediately
-            this.style.display = 'none';
-            document.getElementById('videoSection').style.display = 'block';
-            document.getElementById('videoSection').scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-            });
+            // Show video section
+            videoSection.style.display = 'block';
+            videoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
-        
-        // Video watching function - now submits form data
-        function watchVideo() {
-            alert('Opening introduction video...\n\nIn a real implementation, this would:\n1. Open your actual intro video\n2. Track completion\n3. Enable calendar booking\n\nFor demo purposes, click OK to simulate video completion.');
-            
-            // Submit form data to Formspree after video is watched
-            fetch('https://formspree.io/f/xkgqwwbk', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-            
-            // Show calendar booking
-            document.getElementById('videoWatched').style.display = 'block';
-        }
-        
-        // Calendar scheduling function  
-        function scheduleCall() {
-            alert('Opening calendar to schedule your strategy call...\n\nIn your real implementation, this would open:\n• Calendly link\n• Acuity Scheduling\n• Your preferred booking system\n\nExample: https://calendly.com/yourname/strategy-call');
-        }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+    }
+});
+
+function watchVideo() {
+    alert('Video placeholder - this would open your actual video');
+    document.getElementById('videoWatched').style.display = 'block';
+}
+
+function scheduleCall() {
+    alert('Calendar placeholder - this would open your booking system');
+}
 </script>
 </body>
 </html>
